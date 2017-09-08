@@ -1,4 +1,4 @@
-function Sushi(xPos, yPos, speed, color, size) {
+function Sushi(xPos, yPos, speed, color, size, spoiled) {
   this.xPos = xPos;
   this.yPos = yPos;
   this.xVel = generateXVel(xPos);
@@ -10,6 +10,8 @@ function Sushi(xPos, yPos, speed, color, size) {
   this.color = color;
   this.visible = true;
   this.sliced = false;
+  this.removeColor = removeColor(color);
+  this.spoiled = spoiled;
 }
 
 Sushi.prototype.update = function() {
@@ -26,8 +28,11 @@ Sushi.prototype.draw = function() {
   noStroke();
   fill(this.color);
 
-  if (this.split) {
-    this.color = lerp(this.color, color(51), 0.5);
+  if (this.sliced) {
+    if (this.spoiled) {
+      endGame();
+    }
+    this.color = lerpColor(this.color, this.removeColor, 0.5);
   } else {
     ellipse(this.xPos, this.yPos, this.size)
   }
@@ -39,4 +44,13 @@ function generateXVel(xPos) {
   } else {
     return random(0.5, 1.5);
   }
+}
+
+
+function removeColor(col) {
+  const r = red(col);
+  const g = green(col);
+  const b = blue(col);
+
+  return color(r, g, b, 0);
 }

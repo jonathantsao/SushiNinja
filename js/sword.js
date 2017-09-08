@@ -1,6 +1,5 @@
 function Sword(color) {
   this.slices = [];
-  this.sliceSizes = [];
   this.color = color;
 }
 
@@ -13,7 +12,7 @@ Sword.prototype.update = function() {
   }
 };
 
-Sword.prototype.draw = function() {
+Sword.prototype.draw = function(points, combo) {
   for (let i = 0; i < this.slices.length; i++) {
     let s = map(i, 0, this.slices.length, 2, 20);
     noStroke();
@@ -32,13 +31,14 @@ Sword.prototype.checkForSlice = function(sushi) {
     return false;
   }
 
-  let lastMark = this.slices.slice(-1)[0];
-  let secondToLastMark = this.slices[this.slices.length - 2];
-  let lastToSushi = dist(lastMark.x, lastMark.y, sushi.x, sushi.y);
-  let secondToLastToSushi = dist(secondToLastMark.x, secondToLastMark.y, sushi.x, sushi.y);
-  let markToMark = dist(lastMark.x, lastMark.y, secondToLastMark.x, secondToLastMark.y);
+  const lastMark = this.slices.slice(-1)[0];
+  const secondToLastMark = this.slices[this.slices.length - 2];
+  const lastToSushi = dist(lastMark.x, lastMark.y, sushi.xPos, sushi.yPos);
+  const secondToLastToSushi = dist(secondToLastMark.x, secondToLastMark.y, sushi.xPos, sushi.yPos);
+  const markToMark = dist(lastMark.x, lastMark.y, secondToLastMark.x, secondToLastMark.y);
 
-  if (lastToSushi < markToMark && secondToLastToSushi < markToMark) {
+  if (lastToSushi < sushi.size || ((lastToSushi < markToMark && secondToLastToSushi < markToMark) && markToMark < width / 4)) {
+    sushi.sliced = true;
     return true;
   }
 }
