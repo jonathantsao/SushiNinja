@@ -41,4 +41,4 @@ Sword.prototype.checkForSlice = function(sushi) {
     sushi.sliced = true;
     return true;
   }
-}
+};

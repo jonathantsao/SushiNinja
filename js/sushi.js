@@ -17,7 +17,7 @@ function Sushi(xPos, yPos, speed, color, size, spoiled) {
 Sushi.prototype.update = function() {
   this.xPos += this.xVel;
   this.yPos += this.yVel;
-  this.yVel += 0.1;
+  this.yVel += 0.07;
 
   if (this.yPos > height) {
     this.visible = false;
@@ -25,14 +25,20 @@ Sushi.prototype.update = function() {
 };
 
 Sushi.prototype.draw = function() {
-  noStroke();
   fill(this.color);
+
+  if (this.spoiled) {
+    stroke(0);
+    strokeWeight(5);
+  } else {
+    noStroke();
+  }
 
   if (this.sliced) {
     if (this.spoiled) {
       endGame();
     }
-    this.color = lerpColor(this.color, this.removeColor, 0.5);
+    this.color = lerpColor(this.color, color(51), 0.1);
   } else {
     ellipse(this.xPos, this.yPos, this.size)
   }
