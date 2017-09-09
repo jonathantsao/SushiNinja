@@ -38,8 +38,8 @@ Sword.prototype.checkForSlice = function(sushi) {
   const markToMark = dist(lastMark.x, lastMark.y, secondToLastMark.x, secondToLastMark.y);
 
   if (lastToSushi < sushi.size || ((lastToSushi < markToMark && secondToLastToSushi < markToMark) && markToMark < width / 4)) {
-    debugger;
     sushi.sliced = true;
+    sushi.sliceSound.play();
     return true;
   }
 };

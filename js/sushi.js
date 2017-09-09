@@ -9,6 +9,7 @@ function Sushi(xPos, yPos, speed, size, spoiled) {
   this.opacity = 255;
   this.visible = true;
   this.sliced = false;
+  this.sliceSound = random([sliceSound1, sliceSound2, sliceSound3]);
   this.spoiled = spoiled;
   this.sushiList = [sushi1, sushi2, sushi3, sushi4, sushi5];
   this.type = spoiled ? spoiledSushi : random(this.sushiList);

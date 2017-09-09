@@ -15,9 +15,15 @@ let sushi5;
 let spoiledSushi;
 let life;
 let backgroundSong;
+let sliceSound1;
+let sliceSound2;
+let sliceSound3;
 
 function preload() {
   backgroundSong = loadSound("./assets/song.mp3");
+  sliceSound1 = loadSound("./assets/slice1.mp3");
+  sliceSound2 = loadSound("./assets/slice2.mp3");
+  sliceSound3 = loadSound("./assets/slice3.mp3");
 }
 
 function setup() {
