@@ -6,9 +6,32 @@ let lives;
 let sword;
 let start;
 let stop;
+let sevenSwordsman;
+let sushi1;
+let sushi2;
+let sushi3;
+let sushi4;
+let sushi5;
+let spoiledSushi;
+let life;
+let backgroundSong;
+
+function preload() {
+  backgroundSong = loadSound("./assets/song.mp3");
+}
 
 function setup() {
   bg = loadImage("./assets/background.jpg");
+  sevenSwordsman = loadFont("./assets/seven_swordsman.TTF");
+  sushi1 = loadImage("./assets/sushi1.png");
+  sushi2 = loadImage("./assets/sushi2.png");
+  sushi3 = loadImage("./assets/sushi3.png");
+  sushi4 = loadImage("./assets/sushi4.png");
+  sushi5 = loadImage("./assets/sushi5.png");
+  life = loadImage("./assets/life.png");
+  spoiledSushi = loadImage("./assets/spoiled_sushi.png");
+  backgroundSong.loop();
+
   createCanvas(window.innerWidth, window.innerHeight);
   frameRate(60);
   sword = new Sword(color("#FFFFFF"));
@@ -22,26 +45,16 @@ function draw() {
   background(bg);
   renderLives();
   renderScore();
-
   if (!start) {
     if (mouseIsPressed) {
       start = true;
     }
-    textAlign(CENTER, CENTER);
-    noStroke();
-    fill(255);
-    textSize(30);
-    text("Click and hold to slice some raw fish", width / 2, height / 2);
-    text("Click to Begin!", width / 2, height / 2 + 40);
+    introText();
     return;
   }
 
   if (stop) {
-    textAlign(CENTER);
-    fill("#FF0000");
-    text(`Game over, your score was ${score}`, width / 2, height / 2);
-    text("Press enter to play again!", width / 2, height / 2 + 40);
-    textSize(100);
+    replayText();
     return;
   }
   stop = false;
@@ -55,6 +68,50 @@ function draw() {
       sushi.push(makeSushi());
     }
   }
+  renderSushi();
+
+  if (frameCount % 2 === 0) {
+    sword.update();
+  }
+  sword.draw();
+
+}
+
+
+
+function introText() {
+  textAlign(CENTER, CENTER);
+  stroke(0);
+  fill(255);
+  textSize(60);
+  textFont(sevenSwordsman);
+  text("Welcome to Sushi Ninja", width / 2, height / 2 - 200);
+  text("Click and drag to slice some raw fish...", width / 2, height / 2 - 50);
+  text("but avoid these spoiled ones!", width / 2, height / 2 + 50);
+  image(spoiledSushi, width / 2, height / 2 + 80, 120, 120);
+  text("Click to Begin!", width / 2, height / 2 + 200);
+}
+
+function replayText() {
+  textAlign(CENTER);
+  fill(255);
+  stroke(0);
+  textFont(sevenSwordsman);
+  text(`Game over, your score was ${score}`, width / 2, height / 2 - 50);
+  text("Press enter to play again!", width / 2, height / 2 + 50);
+  textSize(100);
+}
+
+function makeSushi() {
+  const xPos = random(width);
+  const yPos = height;
+  const size = noise(frameCount) * 100 + 100;
+  const spoiled = (random() > 0.95);
+  const speed = random(3, 5);
+  return new Sushi(xPos, yPos, speed, size, spoiled);
+}
+
+function renderSushi() {
   let points = 0;
   for (let i = sushi.length - 1; i >= 0; i--) {
     sushi[i].update();
@@ -72,27 +129,7 @@ function draw() {
       points += sword.checkForSlice(sushi[i]) ? 1 : 0;
     }
   }
-
-  if (frameCount % 2 === 0) {
-    sword.update();
-  }
-  sword.draw();
   score += points;
-}
-
-function makeSushi() {
-  const xPos = random(width);
-  const yPos = height;
-  const size = noise(frameCount) * 20 + 20;
-  const spoiled = (random() > 0.95);
-
-  const r = spoiled ? 255 : 0;
-  const g = spoiled ? 0 : noise(frameCount * 2) * 255;
-  const b = spoiled ? 0: noise(frameCount * 3) * 255;
-
-  const col = color(r, g, b);
-  const speed = random(3, 5);
-  return new Sushi(xPos, yPos, speed, col, size, spoiled);
 }
 
 function renderLives() {
@@ -100,7 +137,7 @@ function renderLives() {
   strokeWeight(3);
   fill("#FF00EE");
   for (let i = lives; i > 0; i--) {
-    ellipse(width - (i * 20 + 20), 50, 20)
+    image(life, width - (i * 60 + 40), 30, 50, 100)
   }
 }
 
