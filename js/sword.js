@@ -37,7 +37,7 @@ Sword.prototype.checkForSlice = function(sushi) {
   const secondToLastToSushi = dist(secondToLastMark.x, secondToLastMark.y, sushi.center[0], sushi.center[1]);
   const markToMark = dist(lastMark.x, lastMark.y, secondToLastMark.x, secondToLastMark.y);
 
-  if (lastToSushi < sushi.size || ((lastToSushi < markToMark && secondToLastToSushi < markToMark) && markToMark < width / 4)) {
+  if (lastToSushi < sushi.size / 2 || ((lastToSushi < markToMark && secondToLastToSushi < markToMark) && markToMark < width / 4)) {
     sushi.sliced = true;
     sushi.sliceSound.play();
     return true;

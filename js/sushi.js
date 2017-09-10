@@ -2,6 +2,8 @@ function Sushi(xPos, yPos, speed, size, spoiled) {
   this.xPos = xPos;
   this.yPos = yPos;
   this.xVel = generateXVel(xPos);
+  // this.rotation = 0;
+  // this.dRotation = this.xVel > 0 ? - PI / 60 : PI / 60;
   this.yVel = -12;
   this.speed = speed;
   this.size = size;
@@ -19,11 +21,15 @@ Sushi.prototype.update = function() {
   this.xPos += this.xVel;
   this.yPos += this.yVel;
   this.yVel += 0.1;
+  // this.rotation += this.dRotation;
 
   if (this.yPos > height) {
     this.visible = false;
   }
   this.center = center(this.xPos, this.yPos, this.size);
+  if (this.sliced) {
+    this.opacity -= 5;
+  }
 };
 
 Sushi.prototype.draw = function() {
