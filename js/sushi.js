@@ -15,6 +15,7 @@ function Sushi(xPos, yPos, speed, size, spoiled) {
   this.spoiled = spoiled;
   this.sushiList = [sushi1, sushi2, sushi3, sushi4, sushi5];
   this.type = spoiled ? spoiledSushi : random(this.sushiList);
+  this.half = sushiHalves(this.type);
 }
 
 Sushi.prototype.update = function() {
@@ -54,4 +55,27 @@ function center(xPos, yPos, size) {
   let centerX = xPos + size / 2;
   let centerY = yPos + size / 2;
   return [centerX, centerY];
+}
+
+function sushiHalves(type) {
+  switch(type) {
+    case spoiledSushi:
+      return null;
+      break;
+    case sushi1:
+      return [sushi1_1, sushi1_2];
+      break;
+    case sushi2:
+      return [sushi2_1, sushi2_2];
+      break;
+    case sushi3:
+      return [sushi3_1, sushi3_2];
+      break;
+    case sushi4:
+      return [sushi4_1, sushi4_2];
+      break;
+    case sushi5:
+      return [sushi5_1, sushi5_2];
+      break;
+  }
 }
