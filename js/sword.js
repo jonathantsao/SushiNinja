@@ -40,6 +40,7 @@ Sword.prototype.checkForSlice = function(sushi) {
   if (lastToSushi < sushi.size / 2 || ((lastToSushi < markToMark && secondToLastToSushi < markToMark) && markToMark < width / 4)) {
     sushi.sliced = true;
     sushi.sliceSound.play();
+    splats.push(new Splat(sushi.center[0], sushi.center[1]));
     return true;
   }
 };

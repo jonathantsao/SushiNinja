@@ -1,6 +1,7 @@
 let bg;
 let slices = [];
 let sushi = [];
+let splats = [];
 let score;
 let lives;
 let sword;
@@ -13,6 +14,7 @@ let sushi3;
 let sushi4;
 let sushi5;
 let spoiledSushi;
+let splatImage;
 let life;
 let backgroundSong;
 let sliceSound1;
@@ -36,6 +38,7 @@ function setup() {
   sushi5 = loadImage("./assets/sushi5.png");
   life = loadImage("./assets/life.png");
   spoiledSushi = loadImage("./assets/spoiled_sushi.png");
+  splatImage = loadImage("./assets/sushi_splat.png");
   backgroundSong.loop();
 
   createCanvas(window.innerWidth - 300, window.innerHeight);
@@ -49,6 +52,7 @@ function setup() {
 
 function draw() {
   background(bg);
+  renderSplats();
   renderLives();
   renderScore();
   if (!start) {
@@ -179,8 +183,18 @@ function keyPressed() {
   }
 }
 
+function renderSplats() {
+  splats.forEach((splat) => {
+    splat.update();
+    if (splat.timer < 240) {
+      image(splatImage, splat.xPos, splat.yPos, 60, 60);
+    }
+  });
+}
+
 function endGame() {
   slices = [];
   sushi = [];
+  splats = [];
   stop = true;
 }
