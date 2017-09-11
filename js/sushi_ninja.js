@@ -38,7 +38,7 @@ function setup() {
   spoiledSushi = loadImage("./assets/spoiled_sushi.png");
   backgroundSong.loop();
 
-  createCanvas(window.innerWidth, window.innerHeight);
+  createCanvas(window.innerWidth - 300, window.innerHeight);
   frameRate(60);
   sword = new Sword(color("#FFFFFF"));
   score = 0;
@@ -53,7 +53,9 @@ function draw() {
   renderScore();
   if (!start) {
     if (mouseIsPressed) {
-      start = true;
+      if (mouseX < width && mouseY < height) {
+        start = true;
+      }
     }
     introText();
     return;
@@ -89,7 +91,7 @@ function introText() {
   textAlign(CENTER, CENTER);
   stroke(0);
   fill(255);
-  textSize(60);
+  textSize(40);
   textFont(sevenSwordsman);
   text("Welcome to Sushi Ninja", width / 2, height / 2 - 200);
   text("Click and drag to slice some raw fish...", width / 2, height / 2 - 50);
@@ -103,9 +105,9 @@ function replayText() {
   fill(255);
   stroke(0);
   textFont(sevenSwordsman);
+  textSize(60);
   text(`Game over, your score was ${score}`, width / 2, height / 2 - 50);
   text("Press enter to play again!", width / 2, height / 2 + 50);
-  textSize(100);
 }
 
 function makeSushi() {
@@ -155,11 +157,25 @@ function renderScore() {
   text(score, 30, 50);
 }
 
+function renderSound() {
+  textAlign(LEFT);
+  strokeWeight(3)
+  fill(255);
+  textSize(20);
+  text("Press ESC to turn the music on/off", 10, height - 10);
+}
+
 function keyPressed() {
   if (keyCode === ENTER) {
     stop = false;
     score = 0;
     lives = 3;
+  } else if (keyCode === ESCAPE) {
+    if (backgroundSong.isPlaying()) {
+      backgroundSong.pause();
+    } else {
+      backgroundSong.loop();
+    }
   }
 }
 

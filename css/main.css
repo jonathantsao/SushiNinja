@@ -1,0 +1,56 @@
+body {
+  display: flex;
+  flex-direction: row-reverse;
+  font-family: sans-serif;
+  color: #606060;
+}
+
+body h4 {
+  text-align: center;
+  margin: 32px 0px 0px 0px;
+}
+
+.scroll-bar {
+  padding: 12px 42px 20px 42px;
+  background: url("/assets/scroll.png") no-repeat;
+  background-size: cover;
+  height: 100%;
+  width: 295px;
+}
+
+#controls-list {
+  list-style-type: none;
+  padding: 5px 10px 10px 10px;
+  background-color: rgba(244, 244, 244, 0.5);
+  border: solid 1px rgb(244, 244, 244);
+  border-radius: 4px;
+  text-align: center;
+}
+
+#controls-list li {
+  text-align: left;
+  margin-top: 5px;
+}
+
+#site-list {
+  list-style-type: none;
+  padding: 5px 10px 4px 10px;
+  background-color: rgba(244, 244, 244, 0.5);
+  border: solid 1px rgb(244, 244, 244);
+  border-radius: 4px;
+  text-align: center;
+}
+
+#site-list li {
+  text-align: left;
+  margin-top: 5px;
+}
+
+a {
+  text-decoration: none;
+  color: #606060;
+}
+
+a:active {
+  color: #606060;
+}
