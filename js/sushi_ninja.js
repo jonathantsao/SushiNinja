@@ -110,7 +110,7 @@ function introText() {
   textSize(40);
   textFont(sevenSwordsman);
   text("Welcome to Sushi Ninja", width / 2, height / 2 - 200);
-  text("Click and drag to slice some raw fish...", width / 2, height / 2 - 50);
+  text("Slice up some raw fish...", width / 2, height / 2 - 50);
   text("but avoid these spoiled ones!", width / 2, height / 2 + 50);
   image(spoiledSushi, width / 2, height / 2 + 80, 120, 120);
   text("Click to Begin!", width / 2, height / 2 + 200);

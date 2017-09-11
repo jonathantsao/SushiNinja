@@ -41,10 +41,12 @@ Sword.prototype.checkForSlice = function(sushi) {
     sushi.sliced = true;
     sushi.sliceSound.play();
     splats.push(new Splat(sushi.center[0], sushi.center[1]));
-    const firstSushiHalf = new SushiHalf(sushi.xPos - 10, sushi.yPos, -sushi.xVel, sushi.yVel, sushi.half[0], sushi.size)
-    const secondSushiHalf = new SushiHalf(sushi.xPos + 10, sushi.yPos, sushi.xVel, sushi.yVel, sushi.half[1], sushi.size)
-    halves.push(firstSushiHalf);
-    halves.push(secondSushiHalf);
+    if (!sushi.spoiled) {
+      const firstSushiHalf = new SushiHalf(sushi.xPos - 10, sushi.yPos, -sushi.xVel, sushi.yVel, sushi.half[0], sushi.size)
+      const secondSushiHalf = new SushiHalf(sushi.xPos + 10, sushi.yPos, sushi.xVel, sushi.yVel, sushi.half[1], sushi.size)
+      halves.push(firstSushiHalf);
+      halves.push(secondSushiHalf);
+    }
     return true;
   }
 };

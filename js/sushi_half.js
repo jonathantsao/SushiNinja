@@ -5,6 +5,7 @@ function SushiHalf(xPos, yPos, xVel, yVel, type, size) {
   this.yVel = yVel;
   this.type = type;
   this.size = size;
+  this.rotation = this.xVel > 0 ? 0.3 : -0.3;
 }
 
 SushiHalf.prototype.update = function() {
@@ -14,5 +15,6 @@ SushiHalf.prototype.update = function() {
 };
 
 SushiHalf.prototype.draw = function() {
+  rotate(this.rotation);
   image(this.type, this.xPos, this.yPos, this.size / 2, this.size);
 };
