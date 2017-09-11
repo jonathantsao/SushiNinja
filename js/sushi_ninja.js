@@ -14,6 +14,16 @@ let sushi2;
 let sushi3;
 let sushi4;
 let sushi5;
+let sushi1_1;
+let sushi1_2;
+let sushi2_1;
+let sushi2_2;
+let sushi3_1;
+let sushi3_2;
+let sushi4_1;
+let sushi4_2;
+let sushi5_1;
+let sushi5_2;
 let spoiledSushi;
 let splatImage;
 let life;
@@ -82,8 +92,8 @@ function draw() {
       sushi.push(makeSushi());
     }
   }
+  renderSushiHalves();
   renderSushi();
-
   if (frameCount % 2 === 0) {
     sword.update();
   }
@@ -146,6 +156,13 @@ function renderSushi() {
   score += points;
 }
 
+function renderSushiHalves() {
+  for (let i = halves.length - 1; i >=0; i--) {
+    halves[i].update();
+    halves[i].draw();
+  }
+}
+
 function renderLives() {
   stroke(255);
   strokeWeight(3);
@@ -195,21 +212,22 @@ function renderSplats() {
 }
 
 function loadSushiHalves() {
-  let sushi1_1 = loadImage("./assets/sushi1_1.png");
-  let sushi1_2 = loadImage("./assets/sushi1_2.png");
-  let sushi2_1 = loadImage("./assets/sushi2_1.png");
-  let sushi2_2 = loadImage("./assets/sushi2_2.png");
-  let sushi3_1 = loadImage("./assets/sushi3_1.png");
-  let sushi3_2 = loadImage("./assets/sushi3_2.png");
-  let sushi4_1 = loadImage("./assets/sushi4_1.png");
-  let sushi4_2 = loadImage("./assets/sushi4_2.png");
-  let sushi5_1 = loadImage("./assets/sushi5_1.png");
-  let sushi5_2 = loadImage("./assets/sushi5_2.png");
+  sushi1_1 = loadImage("./assets/sushi1_1.png");
+  sushi1_2 = loadImage("./assets/sushi1_2.png");
+  sushi2_1 = loadImage("./assets/sushi2_1.png");
+  sushi2_2 = loadImage("./assets/sushi2_2.png");
+  sushi3_1 = loadImage("./assets/sushi3_1.png");
+  sushi3_2 = loadImage("./assets/sushi3_2.png");
+  sushi4_1 = loadImage("./assets/sushi4_1.png");
+  sushi4_2 = loadImage("./assets/sushi4_2.png");
+  sushi5_1 = loadImage("./assets/sushi5_1.png");
+  sushi5_2 = loadImage("./assets/sushi5_2.png");
 }
 
 function endGame() {
   slices = [];
   sushi = [];
   splats = [];
+  halves = [];
   stop = true;
 }

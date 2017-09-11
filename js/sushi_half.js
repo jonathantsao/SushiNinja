@@ -14,5 +14,5 @@ SushiHalf.prototype.update = function() {
 };
 
 SushiHalf.prototype.draw = function() {
-  image(type, this.xPos, this.yPos, this.size / 2, this.size);
+  image(this.type, this.xPos, this.yPos, this.size / 2, this.size);
 };

@@ -63,19 +63,19 @@ function sushiHalves(type) {
       return null;
       break;
     case sushi1:
-      return [sushi1_1, sushi1_2];
+      return [sushi1_2, sushi1_1];
       break;
     case sushi2:
-      return [sushi2_1, sushi2_2];
+      return [sushi2_2, sushi2_1];
       break;
     case sushi3:
-      return [sushi3_1, sushi3_2];
+      return [sushi3_2, sushi3_1];
       break;
     case sushi4:
-      return [sushi4_1, sushi4_2];
+      return [sushi4_2, sushi4_1];
       break;
     case sushi5:
-      return [sushi5_1, sushi5_2];
+      return [sushi5_2, sushi5_1];
       break;
   }
 }
