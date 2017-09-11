@@ -2,6 +2,7 @@ let bg;
 let slices = [];
 let sushi = [];
 let splats = [];
+let halves = [];
 let score;
 let lives;
 let sword;
@@ -39,6 +40,7 @@ function setup() {
   life = loadImage("./assets/life.png");
   spoiledSushi = loadImage("./assets/spoiled_sushi.png");
   splatImage = loadImage("./assets/sushi_splat.png");
+  loadSushiHalves();
   backgroundSong.loop();
 
   createCanvas(window.innerWidth - 300, window.innerHeight);
@@ -187,9 +189,22 @@ function renderSplats() {
   splats.forEach((splat) => {
     splat.update();
     if (splat.timer < 240) {
-      image(splatImage, splat.xPos, splat.yPos, 60, 60);
+      image(splatImage, splat.xPos, splat.yPos, 80, 80);
     }
   });
+}
+
+function loadSushiHalves() {
+  let sushi1_1 = loadImage("./assets/sushi1_1.png");
+  let sushi1_2 = loadImage("./assets/sushi1_2.png");
+  let sushi2_1 = loadImage("./assets/sushi2_1.png");
+  let sushi2_2 = loadImage("./assets/sushi2_2.png");
+  let sushi3_1 = loadImage("./assets/sushi3_1.png");
+  let sushi3_2 = loadImage("./assets/sushi3_2.png");
+  let sushi4_1 = loadImage("./assets/sushi4_1.png");
+  let sushi4_2 = loadImage("./assets/sushi4_2.png");
+  let sushi5_1 = loadImage("./assets/sushi5_1.png");
+  let sushi5_2 = loadImage("./assets/sushi5_2.png");
 }
 
 function endGame() {
