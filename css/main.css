@@ -4,7 +4,7 @@ body {
   justify-content: space-between;
   font-family: sans-serif;
   color: #6B0C0C;
-  background: url("/assets/site-background.jpg") no-repeat;
+  background: url("./assets/site-background.jpg") no-repeat;
   background-size: cover;
 }
 
@@ -20,7 +20,7 @@ body h2 {
 
 .scroll-bar {
   padding: 12px 50px 20px 50px;
-  background: url("/assets/scroll.png") no-repeat;
+  background: url("./assets/scroll.png") no-repeat;
   background-size: cover;
   height: 100%;
   width: 260px;
@@ -28,7 +28,7 @@ body h2 {
 
 .site-bar {
   padding: 12px 50px 20px 50px;
-  background: url("/assets/scroll.png") no-repeat;
+  background: url("./assets/scroll.png") no-repeat;
   background-size: cover;
   height: 100%;
   width: 260px;
