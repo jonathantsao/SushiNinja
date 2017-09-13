@@ -31,6 +31,9 @@ let backgroundSong;
 let sliceSound1;
 let sliceSound2;
 let sliceSound3;
+let pauseForNewLevel;
+let level;
+let newLevelTimer;
 
 function preload() {
   backgroundSong = loadSound("./assets/song.mp3");
@@ -60,6 +63,8 @@ function setup() {
   lives = 3;
   start = false;
   stop = false;
+  pauseForNewLevel = false;
+  level = 1;
 }
 
 function draw() {
@@ -83,12 +88,19 @@ function draw() {
   }
   stop = false;
 
+  processScore();
+
+  if (pauseForNewLevel) {
+    newLevelText(level);
+    newLevel();
+  }
+
   if (mouseIsPressed) {
     sword.slice(mouseX, mouseY);
   }
 
   if (frameCount % 10 === 0) {
-    if (noise(frameCount) > 0.4) {
+    if (noise(frameCount) > processLevel()) {
       sushi.push(makeSushi());
     }
   }
@@ -98,10 +110,7 @@ function draw() {
     sword.update();
   }
   sword.draw();
-
 }
-
-
 
 function introText() {
   textAlign(CENTER, CENTER);
@@ -123,7 +132,7 @@ function replayText() {
   textFont(sevenSwordsman);
   textSize(60);
   text(`Game over, your score was ${score}`, width / 2, height / 2 - 50);
-  text("Press enter to play again!", width / 2, height / 2 + 50);
+  text("Press enter or click to play again!", width / 2, height / 2 + 50);
 }
 
 function makeSushi() {
@@ -189,10 +198,11 @@ function renderSound() {
 }
 
 function keyPressed() {
-  if (keyCode === ENTER) {
+  if (keyCode === ENTER && stop) {
     stop = false;
     score = 0;
     lives = 3;
+    level = 0;
   } else if (keyCode === ESCAPE) {
     if (backgroundSong.isPlaying()) {
       backgroundSong.pause();
@@ -230,4 +240,72 @@ function endGame() {
   splats = [];
   halves = [];
   stop = true;
+}
+
+function processLevel() {
+  const levelThreshold = 0.8 - (level * 0.08);
+  return levelThreshold;
+}
+
+function newLevel() {
+  slices = [];
+  splats = [];
+  halves = [];
+  sushi = [];
+  newLevelTimer += 1;
+  if (newLevelTimer > 240) {
+    pauseForNewLevel = false;
+  }
+}
+
+function processScore() {
+  if (score == 5 && level == 1) {
+    pauseForNewLevel = true;
+    level += 1;
+    newLevelTimer = 0;
+  } else if (score == 12 && level == 2) {
+    pauseForNewLevel = true;
+    level += 1;
+    newLevelTimer = 0;
+  } else if (score == 30 && level == 3) {
+    pauseForNewLevel = true;
+    level += 1;
+    newLevelTimer = 0;
+  } else if (score == 50 && level == 4) {
+    pauseForNewLevel = true;
+    level += 1;
+    newLevelTimer = 0;
+  } else if (score == 90 && level == 5) {
+    pauseForNewLevel = true;
+    level += 1;
+    newLevelTimer = 0;
+  } else if (score == 130 && level == 6) {
+    pauseForNewLevel = true;
+    level += 1;
+    newLevelTimer = 0;
+  }
+}
+
+function mouseClicked() {
+  if (stop && (mouseX < width && mouseY < height)) {
+    stop = false;
+    score = 0;
+    lives = 3;
+    level = 0;
+  }
+}
+
+function newLevelTextShuffler(level) {
+  const text = [`Level ${level - 1} was a piece of sashimi cake...`, `You barely passed level ${level - 1}...`, `I'm actually impressed with your score for ${level - 1}`, "You seem like a promising chef."]
+  return text[level - 2];
+}
+
+function newLevelText(level) {
+  textAlign(CENTER, CENTER);
+  stroke(0);
+  fill(255);
+  textSize(40);
+  textFont(sevenSwordsman);
+  text(newLevelTextShuffler(level), width / 2, height / 2 - 50);
+  text(`But let's see how you do on level ${level}...`, width / 2, height / 2 + 50);
 }
