@@ -34,6 +34,8 @@ let sliceSound3;
 let pauseForNewLevel;
 let level;
 let newLevelTimer;
+let paused;
+let pausedImg;
 
 function preload() {
   backgroundSong = loadSound("./assets/song.mp3");
@@ -53,6 +55,7 @@ function setup() {
   life = loadImage("./assets/life.png");
   spoiledSushi = loadImage("./assets/spoiled_sushi.png");
   splatImage = loadImage("./assets/sushi_splat.png");
+  pausedImg = loadImage("./assets/pause_icon.png");
   loadSushiHalves();
   backgroundSong.loop();
 
@@ -63,6 +66,7 @@ function setup() {
   lives = 3;
   start = false;
   stop = false;
+  paused = false;
   pauseForNewLevel = false;
   level = 1;
 }
@@ -72,6 +76,7 @@ function draw() {
   renderSplats();
   renderLives();
   renderScore();
+  renderPause();
   if (!start) {
     if (mouseIsPressed) {
       if (mouseX < width && mouseY < height) {
@@ -82,17 +87,22 @@ function draw() {
     return;
   }
 
+  if (paused) {
+    renderPauseText();
+    return;
+  }
+
   if (stop) {
     replayText();
     return;
   }
-  stop = false;
 
   processScore();
 
   if (pauseForNewLevel) {
     newLevelText(level);
     newLevel();
+    return;
   }
 
   if (mouseIsPressed) {
@@ -292,6 +302,13 @@ function mouseClicked() {
     score = 0;
     lives = 3;
     level = 0;
+  } else if (paused && (mouseX < width && mouseY < height)) {
+    paused = false;
+  } else if (!paused) {
+    if ((mouseX > 30 && mouseX < 60) && (mouseY > (height / 2 - 80))) {
+      paused = true;
+      slices.pop();
+    }
   }
 }
 
@@ -300,12 +317,26 @@ function newLevelTextShuffler(level) {
   return text[level - 2];
 }
 
-function newLevelText(level) {
+function newLevelText(lev) {
   textAlign(CENTER, CENTER);
   stroke(0);
   fill(255);
   textSize(40);
   textFont(sevenSwordsman);
-  text(newLevelTextShuffler(level), width / 2, height / 2 - 50);
+  text(newLevelTextShuffler(lev), width / 2, height / 2 - 50);
   text(`But let's see how you do on level ${level}...`, width / 2, height / 2 + 50);
+}
+
+function renderPause() {
+  image(pausedImg, 30, height - 55, 30, 30);
+}
+
+function renderPauseText() {
+  textAlign(CENTER, CENTER);
+  stroke(0);
+  fill(255);
+  textSize(40);
+  textFont(sevenSwordsman);
+  text("Paused", width / 2, height / 2 - 50);
+  text("Click anywhere to continue", width / 2, height / 2 + 50);
 }
