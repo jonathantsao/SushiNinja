@@ -304,10 +304,12 @@ function mouseClicked() {
     level = 0;
   } else if (paused && (mouseX < width && mouseY < height)) {
     paused = false;
+    backgroundSong.play();
   } else if (!paused) {
     if ((mouseX > 30 && mouseX < 60) && (mouseY > (height / 2 - 80))) {
       paused = true;
       slices.pop();
+      backgroundSong.pause();
     }
   }
 }
