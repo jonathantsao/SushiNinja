@@ -59,7 +59,7 @@ function setup() {
   loadSushiHalves();
   backgroundSong.loop();
 
-  createCanvas(window.innerWidth - 300, window.innerHeight);
+  createCanvas(window.innerWidth - 400, window.innerHeight);
   frameRate(60);
   sword = new Sword(color("#FFFFFF"));
   score = 0;

@@ -2,6 +2,8 @@
 
 SushiNinja is a fun single player game for sushi chefs of all ages. Players have three lives and click and drag to swing their blade. The game is built entirely using JavaScript and was inspired by HalfBrick's Fruit Ninja.
 
+[Live Site](http://www.jonathan-tsao.com/SushiNinja)
+
 ## Minimum Viable Features
 Listed below are the minimum features SushiNinja will have by September 10th, 2017.
 
@@ -26,7 +28,7 @@ The introduction page will describe the objective and controls for the game.
 
 ![Introduction Page](/docs/introduction.jpg)
 
-The game detail page will have sushi pieces moving left and right. Lives will be rendered on the top right corner, score will be rendered on the top left corner. 
+The game detail page will have sushi pieces moving left and right. Lives will be rendered on the top right corner, score will be rendered on the top left corner.
 
 ![Image Detail Page](/docs/game_detail.jpg)
 
