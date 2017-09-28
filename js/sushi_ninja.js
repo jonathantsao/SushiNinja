@@ -132,7 +132,7 @@ function introText() {
   text("Slice up some raw fish...", width / 2, height / 2 - 50);
   text("but avoid these spoiled ones!", width / 2, height / 2 + 50);
   image(spoiledSushi, width / 2, height / 2 + 80, 120, 120);
-  text("Click to Begin!", width / 2, height / 2 + 200);
+  text("Click anywhere to begin!", width / 2, height / 2 + 200);
 }
 
 function replayText() {
@@ -142,7 +142,7 @@ function replayText() {
   textFont(sevenSwordsman);
   textSize(60);
   text(`Game over, your score was ${score}`, width / 2, height / 2 - 50);
-  text("Press enter or click to play again!", width / 2, height / 2 + 50);
+  text("Press enter to play again!", width / 2, height / 2 + 50);
 }
 
 function makeSushi() {
@@ -212,7 +212,7 @@ function keyPressed() {
     stop = false;
     score = 0;
     lives = 3;
-    level = 0;
+    level = 1;
   } else if (keyCode === ESCAPE) {
     if (backgroundSong.isPlaying()) {
       backgroundSong.pause();
@@ -253,7 +253,7 @@ function endGame() {
 }
 
 function processLevel() {
-  const levelThreshold = 0.8 - (level * 0.08);
+  const levelThreshold = 0.7 - (level * 0.08);
   return levelThreshold;
 }
 
@@ -297,12 +297,7 @@ function processScore() {
 }
 
 function mouseClicked() {
-  if (stop && (mouseX < width && mouseY < height)) {
-    stop = false;
-    score = 0;
-    lives = 3;
-    level = 0;
-  } else if (paused && (mouseX < width && mouseY < height)) {
+  if (paused && (mouseX < width && mouseY < height)) {
     paused = false;
     backgroundSong.play();
   } else if (!paused) {
@@ -315,7 +310,7 @@ function mouseClicked() {
 }
 
 function newLevelTextShuffler(level) {
-  const text = [`Level ${level - 1} was a piece of sashimi cake...`, `You barely passed level ${level - 1}...`, `I'm actually impressed with your score for ${level - 1}`, "You seem like a promising chef."]
+  const text = [`Level ${level - 1} was a piece of sashimi cake...`, `You barely passed level ${level - 1}...`, `I'm actually impressed with your score for level ${level - 1}`, "You seem like a promising chef."]
   return text[level - 2];
 }
 
